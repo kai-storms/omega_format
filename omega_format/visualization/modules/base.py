@@ -35,13 +35,14 @@ class SnippetContainer():
         self.perception = perception
         if self.reference is not None:
             if self.perception is not None:
-                if self.reference.ego_vehicle is None:
+                if self.reference.ego_id is None:
                     self.reference.ego_id = self.perception.ego_id
-                    self.reference.ego_vehicle = self.reference.road_users[self.reference.ego_id]
-                    self.reference.road_users.pop(self.reference.ego_id, None)
                 self.convert_perception_coordinates_to_reference_coordinates()
                 self.adjust_perception_object_birth_stamps()
-
+            
+            if self.reference.ego_vehicle is None:
+                    self.reference.ego_vehicle = self.reference.road_users[self.reference.ego_id]
+                    self.reference.road_users.pop(self.reference.ego_id, None)
             self.timestamps = self.reference.timestamps.val
             self.identifier = '' if self.reference.ego_id is None else f'ego_id: {self.reference.ego_id}'
         elif self.perception is not None:
