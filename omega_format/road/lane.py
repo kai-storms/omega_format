@@ -30,8 +30,8 @@ class Lane(InputClassBase):
     def from_hdf5(cls, group: Group, validate: bool = True, legacy=None):
         func = cls if validate else cls.construct
         self = func(
-            border_right=ReferenceElement(group['borderRight'][:], Border),
-            border_left=ReferenceElement(group['borderLeft'][:], Border),
+            border_right=ReferenceElement(group['borderRight'], Border),
+            border_left=ReferenceElement(group['borderLeft'], Border),
             type=ReferenceTypes.LaneType(group.attrs["type"]),
             sub_type=ReferenceTypes.LaneSubType(group.attrs["subtype"]),
             boundaries=Boundary.convert2objects(group, 'boundary', validate=validate),
