@@ -12,6 +12,7 @@ class Border(InputClassBase):
     @classmethod
     @raise_not_resolved
     def resolve_func(cls, input_recording, i):
+        assert len(i) == 2
         return input_recording.roads[i[0]].borders[i[1]]
 
     @classmethod
